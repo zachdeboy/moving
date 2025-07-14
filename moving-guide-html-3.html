@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zach & Allison's Moving Checklist - August 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f0f4f8;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+
+        .alert {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-weight: 500;
+        }
+
+        .stats-bar {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 16px;
+            background: #f7fafc;
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .stat-label {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .tabs-container {
+            background: white;
+            border-radius: 16px;
+            padding: 8px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: #4a5568;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .tab:hover {
+            background: #f7fafc;
+        }
+
+        .tab.active {
+            background: #4299e1;
+            color: white;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 24px;
+        }
+
+        .room-content {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .room-title {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .room-description {
+            color: #718096;
+            margin-bottom: 24px;
+        }
+
+        .task-category {
+            margin-bottom: 32px;
+        }
+
+        .category-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .add-task-btn {
+            padding: 6px 12px;
+            background: #48bb78;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .add-task-btn:hover {
+            background: #38a169;
+            transform: translateY(-1px);
+        }
+
+        .task-item {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .task-item:hover {
+            background: #edf2f7;
+        }
+
+        .task-item.completed {
+            background: #f0fff4;
+            border-color: #9ae6b4;
+        }
+
+        .task-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #cbd5e0;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .task-item.completed .task-checkbox {
+            background: #48bb78;
+            border-color: #48bb78;
+        }
+
+        .task-item.completed .task-checkbox::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+        }
+
+        .task-text {
+            flex: 1;
+            cursor: text;
+        }
+
+        .task-item.completed .task-text {
+            text-decoration: line-through;
+            color: #718096;
+        }
+
+        .task-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 16px;
+            font-family: inherit;
+            outline: none;
+            padding: 4px;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .task-btn {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .edit-btn {
+            background: #4299e1;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: #3182ce;
+        }
+
+        .save-btn {
+            background: #48bb78;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #38a169;
+        }
+
+        .cancel-btn {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #c53030;
+        }
+
+        .delete-btn {
+            background: #fc8181;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #f56565;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .tips-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .tips-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 16px;
+        }
+
+        .tip-item {
+            background: #f0f4f8;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            background: #4299e1;
+            color: white;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: #3182ce;
+            transform: translateY(-2px);
+        }
+
+        .action-btn.danger {
+            background: #e53e3e;
+        }
+
+        .action-btn.danger:hover {
+            background: #c53030;
+        }
+
+        .add-task-form {
+            background: #e6fffa;
+            border: 2px solid #81e6d9;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .add-task-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .add-task-input:focus {
+            border-color: #4299e1;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏠 Zach & Allison's Moving Guide</h1>
+            <p>Moving from furnished condo to unfurnished house - August 2025</p>
+            <div class="alert">
+                🚨 Priority: Order furniture NOW! Most items have 6-12 week delivery times.
+            </div>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalTasks">0</div>
+                    <div class="stat-label">Total Tasks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="completedTasks">0</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="progressPercent">0%</div>
+                    <div class="stat-label">Progress</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="daysRemaining">0</div>
+                    <div class="stat-label">Days Until Move</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tabs" id="roomTabs"></div>
+        </div>
+
+        <div class="main-content">
+            <div class="room-content" id="roomContent"></div>
+            <div class="sidebar">
+                <div class="tips-card" id="tipsCard"></div>
+                <div class="tips-card">
+                    <h3 class="tips-header">Quick Actions</h3>
+                    <button class="action-btn" onclick="exportChecklist()">📥 Export Checklist</button>
+                    <button class="action-btn danger" onclick="clearAllData()">🗑️ Clear All Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let currentRoom = 'furniture';
+        let completedTasks = new Set();
+        let editingTask = null;
+        let addingToCategory = null;
+
+        // Default room data
+        const defaultRooms = {
+            furniture: {
+                title: "🛍️ Furniture Shopping",
+                description: "Order furniture ASAP - delivery times can be 6-12 weeks!",
+                tips: [
+                    "Measure all rooms before shopping",
+                    "Check delivery lead times",
+                    "Look for quick-ship options",
+                    "Don't forget window treatments"
+                ],
+                categories: {
+                    essential: {
+                        title: "Essential Furniture",
+                        tasks: [
+                            "Order bed frame and mattress",
+                            "Purchase dining table and chairs",
+                            "Order couch and living room seating",
+                            "Buy kitchen furniture if needed",
+                            "Order crib for nursery"
+                        ]
+                    },
+                    storage: {
+                        title: "Storage Solutions",
+                        tasks: [
+                            "Order bedroom dressers",
+                            "Purchase closet organizers",
+                            "Buy bookshelves",
+                            "Order office desk",
+                            "Get garage shelving"
+                        ]
+                    }
+                }
+            },
+            kitchen: {
+                title: "🍳 Kitchen",
+                description: "Check what appliances come with the house and plan accordingly.",
+                tips: [
+                    "List needed appliances",
+                    "Use up frozen foods",
+                    "Pack dishes carefully",
+                    "Label boxes clearly"
+                ],
+                categories: {
+                    planning: {
+                        title: "Planning",
+                        tasks: [
+                            "Check included appliances",
+                            "Make shopping list for kitchenware",
+                            "Research appliance stores",
+                            "Plan cabinet organization"
+                        ]
+                    },
+                    packing: {
+                        title: "Packing",
+                        tasks: [
+                            "Pack non-essential dishes",
+                            "Wrap fragile items",
+                            "Pack small appliances",
+                            "Create first-day kitchen box"
+                        ]
+                    }
+                }
+            },
+            bedroom: {
+                title: "🛏️ Master Bedroom",
+                description: "Focus on essentials for a comfortable first night.",
+                tips: [
+                    "Pack first-night box",
+                    "Use wardrobe boxes",
+                    "Keep jewelry secure",
+                    "Measure for furniture"
+                ],
+                categories: {
+                    planning: {
+                        title: "Planning",
+                        tasks: [
+                            "Measure for bed and dressers",
+                            "Order bedroom furniture",
+                            "Plan closet layout",
+                            "Schedule furniture delivery"
+                        ]
+                    },
+                    packing: {
+                        title: "Packing",
+                        tasks: [
+                            "Pack clothing by season",
+                            "Secure jewelry",
+                            "Pack bedding",
+                            "Label wardrobe boxes"
+                        ]
+                    }
+                }
+            },
+            nursery: {
+                title: "👶 Nursery",
+                description: "Create a safe, organized space for your little one.",
+                tips: [
+                    "Order crib early",
+                    "Pack essentials separately",
+                    "Keep first-week items handy",
+                    "Research pediatricians"
+                ],
+                categories: {
+                    planning: {
+                        title: "Planning",
+                        tasks: [
+                            "Measure nursery space",
+                            "Order crib and changing table",
+                            "Plan safe furniture layout",
+                            "Research local pediatricians"
+                        ]
+                    },
+                    packing: {
+                        title: "Packing",
+                        tasks: [
+                            "Pack baby clothes by size",
+                            "Create essentials box",
+                            "Pack toys and books",
+                            "Organize diaper supplies"
+                        ]
+                    }
+                }
+            },
+            theater: {
+                title: "🎬 Theater Room",
+                description: "Plan your entertainment setup for the new space.",
+                tips: [
+                    "Photo all connections",
+                    "Keep remotes together",
+                    "Plan seating layout",
+                    "Check outlets"
+                ],
+                categories: {
+                    planning: {
+                        title: "Planning",
+                        tasks: [
+                            "Measure for TV and seating",
+                            "Order entertainment furniture",
+                            "Plan speaker placement",
+                            "Research mounting services"
+                        ]
+                    },
+                    packing: {
+                        title: "Packing",
+                        tasks: [
+                            "Pack electronics carefully",
+                            "Label all cables",
+                            "Secure TV for transport",
+                            "Pack media collection"
+                        ]
+                    }
+                }
+            },
+            utilities: {
+                title: "⚡ Utilities",
+                description: "Set up all services before move-in day.",
+                tips: [
+                    "Call 2-3 weeks early",
+                    "Schedule installations",
+                    "Take meter readings",
+                    "Update addresses"
+                ],
+                categories: {
+                    setup: {
+                        title: "New House Setup",
+                        tasks: [
+                            "Schedule electricity",
+                            "Set up water/sewer",
+                            "Schedule internet",
+                            "Arrange trash service"
+                        ]
+                    },
+                    cancel: {
+                        title: "Condo Services",
+                        tasks: [
+                            "Schedule final readings",
+                            "Cancel/transfer insurance",
+                            "Forward mail",
+                            "Update addresses"
+                        ]
+                    }
+                }
+            }
+        };
+
+        // Get rooms data (with custom tasks)
+        function getRooms() {
+            try {
+                const saved = localStorage.getItem('zachAllisonRooms');
+                if (saved) {
+                    return JSON.parse(saved);
+                }
+            } catch (e) {
+                console.log('Using default rooms');
+            }
+            return defaultRooms;
+        }
+
+        // Save rooms data
+        function saveRooms(rooms) {
+            localStorage.setItem('zachAllisonRooms', JSON.stringify(rooms));
+        }
+
+        // Initialize
+        function init() {
+            loadState();
+            renderTabs();
+            renderRoom();
+            updateStats();
+            updateDays();
+        }
+
+        // Load saved state
+        function loadState() {
+            try {
+                const saved = localStorage.getItem('zachAllisonMoving');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    completedTasks = new Set(data.completed || []);
+                    currentRoom = data.room || 'furniture';
+                }
+            } catch (e) {
+                console.log('No saved data found');
+            }
+        }
+
+        // Save state
+        function saveState() {
+            localStorage.setItem('zachAllisonMoving', JSON.stringify({
+                completed: Array.from(completedTasks),
+                room: currentRoom
+            }));
+        }
+
+        // Render tabs
+        function renderTabs() {
+            const rooms = getRooms();
+            const container = document.getElementById('roomTabs');
+            container.innerHTML = '';
+            
+            Object.entries(rooms).forEach(([id, room]) => {
+                const tab = document.createElement('button');
+                tab.className = `tab ${currentRoom === id ? 'active' : ''}`;
+                tab.textContent = room.title;
+                tab.onclick = () => {
+                    currentRoom = id;
+                    saveState();
+                    renderTabs();
+                    renderRoom();
+                };
+                container.appendChild(tab);
+            });
+        }
+
+        // Render current room
+        function renderRoom() {
+            const rooms = getRooms();
+            const room = rooms[currentRoom];
+            const container = document.getElementById('roomContent');
+            
+            let html = `
+                <h2 class="room-title">${room.title}</h2>
+                <p class="room-description">${room.description}</p>
+            `;
+
+            Object.entries(room.categories).forEach(([catId, category]) => {
+                html += `
+                    <div class="task-category">
+                        <div class="category-header">
+                            <span>${category.title}</span>
+                            <button class="add-task-btn" onclick="showAddTask('${catId}')">+ Add Task</button>
+                        </div>
+                `;
+
+                // Add task form (hidden by default)
+                if (addingToCategory === catId) {
+                    html += `
+                        <div class="add-task-form">
+                            <input type="text" 
+                                   class="add-task-input" 
+                                   id="newTaskInput" 
+                                   placeholder="Enter new task..."
+                                   onkeypress="if(event.key==='Enter') addTask('${catId}')">
+                            <button class="task-btn save-btn" onclick="addTask('${catId}')">Add</button>
+                            <button class="task-btn cancel-btn" onclick="cancelAddTask()">Cancel</button>
+                        </div>
+                    `;
+                }
+
+                category.tasks.forEach((task, index) => {
+                    const taskId = `${currentRoom}-${catId}-${index}`;
+                    const completed = completedTasks.has(taskId);
+                    const isEditing = editingTask === taskId;
+                    
+                    html += `
+                        <div class="task-item ${completed ? 'completed' : ''}">
+                            <div class="task-checkbox" onclick="toggleTask('${taskId}')"></div>
+                    `;
+
+                    if (isEditing) {
+                        html += `
+                            <input type="text" 
+                                   class="task-input" 
+                                   id="editInput" 
+                                   value="${task}"
+                                   onkeypress="if(event.key==='Enter') saveEdit('${catId}', ${index})">
+                            <div class="task-actions">
+                                <button class="task-btn save-btn" onclick="saveEdit('${catId}', ${index})">Save</button>
+                                <button class="task-btn cancel-btn" onclick="cancelEdit()">Cancel</button>
+                            </div>
+                        `;
+                    } else {
+                        html += `
+                            <div class="task-text">${task}</div>
+                            <div class="task-actions">
+                                <button class="task-btn edit-btn" onclick="startEdit('${taskId}')">Edit</button>
+                                <button class="task-btn delete-btn" onclick="deleteTask('${catId}', ${index})">Delete</button>
+                            </div>
+                        `;
+                    }
+
+                    html += '</div>';
+                });
+
+                html += '</div>';
+            });
+
+            container.innerHTML = html;
+
+            // Focus on input if adding or editing
+            setTimeout(() => {
+                if (addingToCategory) {
+                    document.getElementById('newTaskInput')?.focus();
+                }
+                if (editingTask) {
+                    document.getElementById('editInput')?.focus();
+                }
+            }, 100);
+
+            // Render tips
+            const tipsContainer = document.getElementById('tipsCard');
+            let tipsHtml = '<h3 class="tips-header">💡 Tips</h3>';
+            room.tips.forEach(tip => {
+                tipsHtml += `<div class="tip-item">${tip}</div>`;
+            });
+            tipsContainer.innerHTML = tipsHtml;
+        }
+
+        // Toggle task completion
+        function toggleTask(taskId) {
+            if (completedTasks.has(taskId)) {
+                completedTasks.delete(taskId);
+            } else {
+                completedTasks.add(taskId);
+            }
+            saveState();
+            renderRoom();
+            updateStats();
+        }
+
+        // Start editing a task
+        function startEdit(taskId) {
+            editingTask = taskId;
+            renderRoom();
+        }
+
+        // Cancel editing
+        function cancelEdit() {
+            editingTask = null;
+            renderRoom();
+        }
+
+        // Save edited task
+        function saveEdit(catId, taskIndex) {
+            const newText = document.getElementById('editInput').value.trim();
+            if (newText) {
+                const rooms = getRooms();
+                rooms[currentRoom].categories[catId].tasks[taskIndex] = newText;
+                saveRooms(rooms);
+                editingTask = null;
+                renderRoom();
+            }
+        }
+
+        // Delete task
+        function deleteTask(catId, taskIndex) {
+            if (confirm('Delete this task?')) {
+                const rooms = getRooms();
+                rooms[currentRoom].categories[catId].tasks.splice(taskIndex, 1);
+                saveRooms(rooms);
+                
+                // Remove from completed tasks if it was there
+                const taskId = `${currentRoom}-${catId}-${taskIndex}`;
+                completedTasks.delete(taskId);
+                
+                // Adjust completed task IDs for tasks after the deleted one
+                const newCompleted = new Set();
+                completedTasks.forEach(id => {
+                    const parts = id.split('-');
+                    if (parts[0] === currentRoom && parts[1] === catId) {
+                        const idx = parseInt(parts[2]);
+                        if (idx < taskIndex) {
+                            newCompleted.add(id);
+                        } else if (idx > taskIndex) {
+                            newCompleted.add(`${currentRoom}-${catId}-${idx - 1}`);
+                        }
+                    } else {
+                        newCompleted.add(id);
+                    }
+                });
+                completedTasks = newCompleted;
+                saveState();
+                
+                renderRoom();
+                updateStats();
+            }
+        }
+
+        // Show add task form
+        function showAddTask(catId) {
+            addingToCategory = catId;
+            renderRoom();
+        }
+
+        // Cancel adding task
+        function cancelAddTask() {
+            addingToCategory = null;
+            renderRoom();
+        }
+
+        // Add new task
+        function addTask(catId) {
+            const input = document.getElementById('newTaskInput');
+            const newTask = input.value.trim();
+            
+            if (newTask) {
+                const rooms = getRooms();
+                rooms[currentRoom].categories[catId].tasks.push(newTask);
+                saveRooms(rooms);
+                addingToCategory = null;
+                renderRoom();
+                updateStats();
+            }
+        }
+
+        // Update stats
+        function updateStats() {
+            const rooms = getRooms();
+            let total = 0;
+            let completed = 0;
+
+            Object.entries(rooms).forEach(([roomId, room]) => {
+                Object.entries(room.categories).forEach(([catId, category]) => {
+                    category.tasks.forEach((task, index) => {
+                        total++;
+                        if (completedTasks.has(`${roomId}-${catId}-${index}`)) {
+                            completed++;
+                        }
+                    });
+                });
+            });
+
+            document.getElementById('totalTasks').textContent = total;
+            document.getElementById('completedTasks').textContent = completed;
+            document.getElementById('progressPercent').textContent = 
+                total > 0 ? Math.round((completed / total) * 100) + '%' : '0%';
+        }
+
+        // Update days
+        function updateDays() {
+            const moveDate = new Date(2025, 7, 31); // August 31, 2025
+            const today = new Date();
+            const days = Math.ceil((moveDate - today) / (1000 * 60 * 60 * 24));
+            document.getElementById('daysRemaining').textContent = days > 0 ? days : 0;
+        }
+
+        // Export checklist
+        function exportChecklist() {
+            const rooms = getRooms();
+            let text = 'Zach & Allison\'s Moving Checklist\n';
+            text += 'Target Move Date: August 31, 2025\n';
+            text += `Generated: ${new Date().toLocaleDateString()}\n\n`;
+
+            Object.entries(rooms).forEach(([roomId, room]) => {
+                text += `\n${room.title}\n`;
+                text += '='.repeat(30) + '\n';
+
+                Object.entries(room.categories).forEach(([catId, category]) => {
+                    text += `\n${category.title}\n`;
+                    
+                    category.tasks.forEach((task, index) => {
+                        const taskId = `${roomId}-${catId}-${index}`;
+                        const check = completedTasks.has(taskId) ? '✓' : '☐';
+                        text += `${check} ${task}\n`;
+                    });
+                });
+            });
+
+            // Download file
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'zach-allison-moving-checklist.txt';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Clear all data
+        function clearAllData() {
+            if (confirm('Clear all data and start fresh?')) {
+                localStorage.removeItem('zachAllisonMoving');
+                localStorage.removeItem('zachAllisonRooms');
+                location.reload();
+            }
+        }
+
+        // Start the app
+        init();
+    </script>
+</body>
+</html>
